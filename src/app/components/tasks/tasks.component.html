@@ -2,8 +2,7 @@
  
   <div class="header">
     <h2>My Tasks</h2>
-    <button pButton type="button" icon="pi pi-plus" label="New Task" class="p-button-rounded p-button-sm p-button-secondary"></button>
-  </div>
+    <button pButton type="button" label="New Task" icon="pi pi-plus" (click)="openNewTaskDialog()"></button>  </div>
 
   <!-- Search input -->
   <div class="search">
@@ -26,10 +25,10 @@
     </p-dropdown>
   </div>
 
-  <!-- Tabs -->
+
   <p-tabView>
 
-    <!-- All -->
+ 
     <p-tabPanel header="All">
       <div class="tab-content">
         <div class="empty-state">
@@ -38,7 +37,7 @@
       </div>
     </p-tabPanel>
 
-    <!-- Active -->
+
     <p-tabPanel header="Active">
       <div class="tab-content">
         <div class="empty-state">
@@ -47,7 +46,6 @@
       </div>
     </p-tabPanel>
 
-    <!-- Completed -->
     <p-tabPanel header="Completed">
       <div class="tab-content">
         <div class="empty-state">
@@ -59,3 +57,12 @@
   </p-tabView>
 
   
+  <p-dialog 
+  header="Create New Task haidr" 
+  [(visible)]="displayNewTaskDialog" 
+  [modal]="true" 
+  [closable]="true" 
+  [style]="{width: '40vw'}"
+>
+  <app-new-task-dialog></app-new-task-dialog>
+</p-dialog>
