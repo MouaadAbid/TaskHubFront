@@ -1,0 +1,68 @@
+<div class="container">
+ 
+  <div class="header">
+    <h2>My Tasks</h2>
+    <button pButton type="button" label="New Task" icon="pi pi-plus" (click)="openNewTaskDialog()"></button>  </div>
+
+  <!-- Search input -->
+  <div class="search">
+    <span class="p-input-icon-left full-width">
+      <i class="pi pi-search"></i>
+      <input type="text" pInputText placeholder="Search..." />
+    </span>
+  </div>
+
+  <!-- Filters -->
+  <div class="filters">
+    <p-dropdown 
+      [options]="[
+        { label: 'Low', value: 'low' },
+        { label: 'Medium', value: 'medium' },
+        { label: 'High', value: 'high' }
+      ]"
+      placeholder="All Priorities"
+      class="priority-dropdown">
+    </p-dropdown>
+  </div>
+
+
+  <p-tabView>
+
+ 
+    <p-tabPanel header="All">
+      <div class="tab-content">
+        <div class="empty-state">
+          No tasks found in 'All'. Create a new task to get started!
+        </div>
+      </div>
+    </p-tabPanel>
+
+
+    <p-tabPanel header="Active">
+      <div class="tab-content">
+        <div class="empty-state">
+          No tasks found in 'Active'.
+        </div>
+      </div>
+    </p-tabPanel>
+
+    <p-tabPanel header="Completed">
+      <div class="tab-content">
+        <div class="empty-state">
+          No tasks found in 'Completed'.
+        </div>
+      </div>
+    </p-tabPanel>
+
+  </p-tabView>
+
+  
+  <p-dialog 
+  header="Create New Task haidr" 
+  [(visible)]="displayNewTaskDialog" 
+  [modal]="true" 
+  [closable]="true" 
+  [style]="{width: '40vw'}"
+>
+  <app-new-task-dialog></app-new-task-dialog>
+</p-dialog>
