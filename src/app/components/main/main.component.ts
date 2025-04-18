@@ -9,7 +9,7 @@ import { TasksComponent } from '../tasks/tasks.component';
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [CarouselModule,ButtonModule,TasksComponent],
+  imports: [CarouselModule,ButtonModule,],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
