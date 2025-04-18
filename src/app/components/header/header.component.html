@@ -1,1 +1,39 @@
-<p>header works!</p>
+<header class="header-elegant">
+    <nav class="navbar navbar-expand-lg p-0">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <span class="brand-icon pi pi-check-circle"></span>
+          <span class="brand-text">TaskHub</span>
+        </a>
+        
+        <button class="navbar-toggler" type="button" >
+          <span class="pi pi-bars"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" >
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="home" routerLinkActive="active">
+                <span class="pi pi-home"></span> Home
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="tasks" routerLinkActive="active">
+                <span class="pi pi-list"></span> Tasks
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="about" routerLinkActive="active">
+                <span class="pi pi-info-circle"></span> About
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="contact" routerLinkActive="active">
+                <span class="pi pi-envelope"></span> Contact
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>

@@ -1,0 +1,61 @@
+<div class="container">
+ 
+  <div class="header">
+    <h2>My Tasks</h2>
+    <button pButton type="button" icon="pi pi-plus" label="New Task" class="p-button-rounded p-button-sm p-button-secondary"></button>
+  </div>
+
+  <!-- Search input -->
+  <div class="search">
+    <span class="p-input-icon-left full-width">
+      <i class="pi pi-search"></i>
+      <input type="text" pInputText placeholder="Search..." />
+    </span>
+  </div>
+
+  <!-- Filters -->
+  <div class="filters">
+    <p-dropdown 
+      [options]="[
+        { label: 'Low', value: 'low' },
+        { label: 'Medium', value: 'medium' },
+        { label: 'High', value: 'high' }
+      ]"
+      placeholder="All Priorities"
+      class="priority-dropdown">
+    </p-dropdown>
+  </div>
+
+  <!-- Tabs -->
+  <p-tabView>
+
+    <!-- All -->
+    <p-tabPanel header="All">
+      <div class="tab-content">
+        <div class="empty-state">
+          No tasks found in 'All'. Create a new task to get started!
+        </div>
+      </div>
+    </p-tabPanel>
+
+    <!-- Active -->
+    <p-tabPanel header="Active">
+      <div class="tab-content">
+        <div class="empty-state">
+          No tasks found in 'Active'.
+        </div>
+      </div>
+    </p-tabPanel>
+
+    <!-- Completed -->
+    <p-tabPanel header="Completed">
+      <div class="tab-content">
+        <div class="empty-state">
+          No tasks found in 'Completed'.
+        </div>
+      </div>
+    </p-tabPanel>
+
+  </p-tabView>
+
+  
