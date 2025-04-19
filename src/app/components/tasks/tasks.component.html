@@ -2,7 +2,7 @@
  
   <div class="header">
     <h2>My Tasks</h2>
-    <button pButton type="button" label="New Task" icon="pi pi-plus" (click)="openNewTaskDialog()"></button>  </div>
+    <button pButton type="button" label="New Task" icon="pi pi-plus" (click)="openTaskModal()"></button>  </div>
 
   <!-- Search input -->
   <div class="search">
@@ -64,5 +64,5 @@
   [closable]="true" 
   [style]="{width: '40vw'}"
 >
-  <app-new-task-dialog></app-new-task-dialog>
+ <app-modal-task></app-modal-task>
 </p-dialog>
