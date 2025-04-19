@@ -6,9 +6,9 @@ import { ButtonModule } from 'primeng/button';
 import { TabViewModule } from 'primeng/tabview';
 import { DropdownModule } from 'primeng/dropdown';
 import { DialogModule } from 'primeng/dialog';
-import { NewTaskDialogComponent } from '../../app/components/tasks/new-task-dialog/new-task-dialog.component';
 import { OnInit } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
+import { ModalTaskComponent } from '../modals/modal-task/modal-task.component'; 
 
 import {TaskService  } from '../../services/task.service';
 
@@ -16,7 +16,7 @@ import {TaskService  } from '../../services/task.service';
 @Component({
   selector: 'app-tasks',
   standalone: true,
-  imports: [InputTextModule,ButtonModule,TabViewModule, DropdownModule,DialogModule,NewTaskDialogComponent],
+  imports: [InputTextModule,ButtonModule,TabViewModule, DropdownModule,DialogModule,ModalTaskComponent],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css'
 })
@@ -39,7 +39,7 @@ export class TasksComponent implements OnInit {
   }
   displayNewTaskDialog = false;
   tasks: any[] = [];
-  openNewTaskDialog() {
+  openTaskModal() {
     this.displayNewTaskDialog = true;
   }
 }

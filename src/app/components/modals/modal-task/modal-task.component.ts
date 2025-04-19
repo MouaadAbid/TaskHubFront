@@ -5,19 +5,17 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TextareaModule } from 'primeng/textarea';
 import { CalendarModule } from 'primeng/calendar';
 
-
 @Component({
-  selector: 'app-new-task-dialog',
+  selector: 'app-modal-task',
   standalone: true,
   imports: [InputTextModule,
     TextareaModule,
     DropdownModule,
     CalendarModule,
     ButtonModule],
-  templateUrl: './new-task-dialog.component.html',
-  styleUrl: './new-task-dialog.component.css'
+  templateUrl: './modal-task.component.html',
+  styleUrl: './modal-task.component.css'
 })
-export class NewTaskDialogComponent {
-displayNewTaskDialog: any;
-
+export class ModalTaskComponent {
+  displayNewTaskDialog: any;
 }
