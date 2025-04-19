@@ -7,6 +7,10 @@ import { TabViewModule } from 'primeng/tabview';
 import { DropdownModule } from 'primeng/dropdown';
 import { DialogModule } from 'primeng/dialog';
 import { NewTaskDialogComponent } from '../../app/components/tasks/new-task-dialog/new-task-dialog.component';
+import { OnInit } from '@angular/core';
+import { BackendService } from '../../services/backend.service';
+
+import {TaskService  } from '../../services/task.service';
 
 
 @Component({
@@ -16,9 +20,25 @@ import { NewTaskDialogComponent } from '../../app/components/tasks/new-task-dial
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css'
 })
-export class TasksComponent {
+export class TasksComponent implements OnInit {
+  constructor(    private backendService: BackendService,
+    private taskService: TaskService
+  ) { }
+  ngOnInit() {
+    this.getTasks();
+  }
+  getTasks() {
+    // Simulate an API call to fetch tasks
+    this.taskService.getTasks().subscribe(
+      (response: any) => {
+        this.tasks = response;
+        console.log('Tasks fetched successfully:', this.tasks);
+        
+      }
+    );
+  }
   displayNewTaskDialog = false;
-
+  tasks: any[] = [];
   openNewTaskDialog() {
     this.displayNewTaskDialog = true;
   }
