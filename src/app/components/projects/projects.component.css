@@ -1,26 +1,38 @@
-.task-container {
-  max-width: 1100px;
+.projects-container {
+  max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Header */
-.task-header {
+/* Zone de recherche */
+.search-bar {
+  margin-bottom: 1.5rem;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* En-tête avec bouton */
+.header-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
-.task-header h2 {
-  font-size: 2rem;
+.header-bar h2 {
+  font-size: 1.75rem;
   font-weight: 600;
   color: #333;
   margin: 0;
 }
 
-/* Bouton noir */
+/* Bouton Add Project */
 .btn-black {
   background-color: #000 !important;
   color: #fff !important;
@@ -35,44 +47,15 @@
   background-color: #1a1a1a !important;
 }
 
-/* Search bar */
-.task-search {
-  margin-bottom: 1.5rem;
-}
-
-.task-search input {
-  width: 100%;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-
-/* Dropdown / Filtres */
-.task-filters {
-  margin-bottom: 2rem;
-}
-
-.priority-dropdown {
-  width: 250px;
-}
-
-/* Onglets */
-.tab-content {
-  padding: 1.5rem;
+/* Carte contenant le tableau */
+.project-table {
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 1rem;
 }
 
-/* Message vide */
-.empty-state {
-  text-align: center;
-  color: #888;
-  font-size: 1rem;
-  padding: 2rem;
-}
-
-/* Dialog */
+/* Dialog style */
 ::ng-deep .p-dialog {
   border-radius: 12px;
 }

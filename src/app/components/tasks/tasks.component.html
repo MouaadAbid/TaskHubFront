@@ -1,35 +1,41 @@
-<div class="container">
- 
-  <div class="header">
+<div class="task-container">
+
+  <!-- Header avec titre et bouton -->
+  <div class="task-header">
     <h2>My Tasks</h2>
-    <button pButton type="button" icon="pi pi-plus" label="New Task" class="p-button-rounded p-button-sm p-button-secondary"></button>
+    <button
+      pButton
+      type="button"
+      label="New Task"
+      icon="pi pi-plus"
+      class="btn-black"
+      (click)="openTaskModal()"
+    ></button>
   </div>
 
-  <!-- Search input -->
-  <div class="search">
+  <!-- Zone de recherche -->
+  <div class="task-search">
     <span class="p-input-icon-left full-width">
       <i class="pi pi-search"></i>
       <input type="text" pInputText placeholder="Search..." />
     </span>
   </div>
 
-  <!-- Filters -->
-  <div class="filters">
-    <p-dropdown 
+  <!-- Filtres -->
+  <div class="task-filters">
+    <p-dropdown
       [options]="[
         { label: 'Low', value: 'low' },
         { label: 'Medium', value: 'medium' },
         { label: 'High', value: 'high' }
       ]"
       placeholder="All Priorities"
-      class="priority-dropdown">
-    </p-dropdown>
+      class="priority-dropdown"
+    ></p-dropdown>
   </div>
 
-  <!-- Tabs -->
+  <!-- Onglets -->
   <p-tabView>
-
-    <!-- All -->
     <p-tabPanel header="All">
       <div class="tab-content">
         <div class="empty-state">
@@ -38,7 +44,6 @@
       </div>
     </p-tabPanel>
 
-    <!-- Active -->
     <p-tabPanel header="Active">
       <div class="tab-content">
         <div class="empty-state">
@@ -47,7 +52,6 @@
       </div>
     </p-tabPanel>
 
-    <!-- Completed -->
     <p-tabPanel header="Completed">
       <div class="tab-content">
         <div class="empty-state">
@@ -55,7 +59,16 @@
         </div>
       </div>
     </p-tabPanel>
-
   </p-tabView>
 
-  
+  <!-- Dialog -->
+  <p-dialog
+    header="Create New Task"
+    [(visible)]="displayNewTaskDialog"
+    [modal]="true"
+    [closable]="true"
+    [style]="{ width: '40vw' }"
+  >
+    <app-modal-task></app-modal-task>
+  </p-dialog>
+</div>
