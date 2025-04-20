@@ -1,0 +1,33 @@
+<div class="modal-user-form">
+    <div class="form-field">
+      <label for="name">Name</label>
+      <input id="name" type="text" pInputText [(ngModel)]="user.name" />
+    </div>
+  
+    <div class="form-field">
+      <label for="email">Email</label>
+      <input id="email" type="email" pInputText [(ngModel)]="user.email" />
+    </div>
+  
+    <div class="form-field">
+      <label for="phone">Phone</label>
+      <input id="phone" type="text" pInputText [(ngModel)]="user.phone" />
+    </div>
+  
+    <div class="form-field">
+      <label for="photo">Photo URL</label>
+      <input id="photo" type="text" pInputText [(ngModel)]="user.photo" />
+    </div>
+  
+    <div class="form-actions">
+      <button
+        pButton
+        type="button"
+        label="Save"
+        icon="pi pi-check"
+        class="btn-black"
+        (click)="saveUser()"
+      ></button>
+    </div>
+  </div>
+  

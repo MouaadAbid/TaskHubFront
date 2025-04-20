@@ -1,0 +1,25 @@
+.projects-container {
+    padding: 1rem 2rem;
+  }
+  
+  .search-bar {
+    margin-bottom: 1rem;
+  }
+  
+  .header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .btn-black {
+    background-color: #000 !important;
+    color: #fff !important;
+    border: none;
+  }
+  
+  .project-table {
+    margin-top: 1rem;
+  }
+  

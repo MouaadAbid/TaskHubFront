@@ -1,70 +1,88 @@
-.container {
-  padding: 20px;
-  max-width: 800px;
-  margin: auto;
+.task-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.header {
+/* Header */
+.task-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 2rem;
 }
 
-.header h2 {
-  font-size: 24px;
+.task-header h2 {
+  font-size: 2rem;
   font-weight: 600;
   color: #333;
+  margin: 0;
 }
 
-.search {
-  margin-bottom: 16px;
+/* Bouton noir */
+.btn-black {
+  background-color: #000 !important;
+  color: #fff !important;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
 }
 
-.full-width {
+.btn-black:hover {
+  background-color: #1a1a1a !important;
+}
+
+/* Search bar */
+.task-search {
+  margin-bottom: 1.5rem;
+}
+
+.task-search input {
   width: 100%;
-  max-width: 400px;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }
 
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  align-items: center;
-  margin-bottom: 24px;
+/* Dropdown / Filtres */
+.task-filters {
+  margin-bottom: 2rem;
 }
 
 .priority-dropdown {
-  min-width: 150px;
+  width: 250px;
 }
 
+/* Onglets */
 .tab-content {
-  padding: 20px;
+  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
+/* Message vide */
 .empty-state {
   text-align: center;
-  border: 2px dashed #ccc;
-  padding: 40px 20px;
-  border-radius: 8px;
-  color: #777;
-  font-size: 14px;
+  color: #888;
+  font-size: 1rem;
+  padding: 2rem;
 }
 
-.floating-btn {
-  display: flex;
-  justify-content: center;
-  margin-top: 40px;
+/* Dialog */
+::ng-deep .p-dialog {
+  border-radius: 12px;
 }
 
-.colorful-button {
-  background: linear-gradient(90deg, #a855f7, #ec4899, #f97316);
-  border: none;
-  color: white;
-  padding: 10px 18px;
-  border-radius: 999px;
-  font-size: 14px;
-  font-weight: 500;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-  cursor: pointer;
+::ng-deep .p-dialog .p-dialog-header {
+  font-size: 1.25rem;
+  background-color: #f4f4f4;
+  font-weight: 600;
+}
+
+::ng-deep .p-dialog .p-dialog-content {
+  padding: 1.5rem;
 }
