@@ -24,4 +24,3 @@ export class ProjectsComponent {
     { name: 'Mobile Banking App', description: 'Banking on the go', createdBy: 'Lina' },
   ];
 }
-

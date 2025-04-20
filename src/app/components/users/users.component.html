@@ -1,5 +1,4 @@
 <div class="projects-container">
-    <!-- Zone de recherche --> 
     <div class="search-bar">
       <span class="p-input-icon-left">
         <i class="pi pi-search"></i>
@@ -13,7 +12,6 @@
       </span>
     </div>
   
-    <!-- Header avec bouton -->
     <div class="header-bar">
       <h2>Users</h2>
       <button
@@ -25,8 +23,6 @@
         (click)="displayAddUserDialog = true"
       ></button>
     </div>
-  
-    <!-- Tableau des utilisateurs -->
     <div class="card project-table">
       <p-table
         #table
@@ -65,7 +61,6 @@
       </p-table>
     </div>
   
-    <!-- Dialog -->
     <p-dialog
       header="Add User"
       [(visible)]="displayAddUserDialog"
