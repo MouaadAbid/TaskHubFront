@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TaskService {
-private apiUrl = 'https://68059421ca467c15be695f21.mockapi.io/1/task';
+  private apiUrl = 'https://68059421ca467c15be695f21.mockapi.io/TaskHub/task';
+
   constructor(private http: HttpClient) {}
 
   // Get all tasks
