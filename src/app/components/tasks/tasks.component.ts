@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
-import { TabViewModule } from 'primeng/tabview';
+import { TabPanel, TabViewModule } from 'primeng/tabview';
 import { DropdownModule } from 'primeng/dropdown';
 import { DialogModule } from 'primeng/dialog';
 import { OnInit } from '@angular/core';
@@ -11,12 +11,13 @@ import { BackendService } from '../../services/backend.service';
 import { ModalTaskComponent } from '../modals/modal-task/modal-task.component'; 
 
 import {TaskService  } from '../../services/task.service';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-tasks',
   standalone: true,
-  imports: [InputTextModule,ButtonModule,TabViewModule, DropdownModule,DialogModule,ModalTaskComponent],
+  imports: [InputTextModule,ButtonModule,TabViewModule, DropdownModule,DialogModule,ModalTaskComponent,CommonModule,TabPanel],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css'
 })
@@ -28,7 +29,6 @@ export class TasksComponent implements OnInit {
     this.getTasks();
   }
   getTasks() {
-    // Simulate an API call to fetch tasks
     this.taskService.getTasks().subscribe(
       (response: any) => {
         this.tasks = response;

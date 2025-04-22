@@ -7,15 +7,15 @@ import { Observable } from 'rxjs';
 })
 export class ProjectService {
   
-  private apiUrl = 'http://127.0.0.1:8000'; 
+  private apiUrl = 'https://68059421ca467c15be695f21.mockapi.io/TaskHub/project'; 
+ 
 
   constructor(private http: HttpClient) { }
 
   //  GET  All projects
   getProjects(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/projects/`);
+    return this.http.get(this.apiUrl);
   }
-
    // Get a project by ID
    getProjectById(id: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/projects/${id}/`);
