@@ -38,25 +38,34 @@
   <p-tabView>
     <p-tabPanel header="All">
       <div class="tab-content">
-        <div class="empty-state">
-          No tasks found in 'All'. Create a new task to get started!
+        <div *ngIf="tasks.length === 0" class="empty-state">
+          No tasks found.
         </div>
-      </div>
-    </p-tabPanel>
 
-    <p-tabPanel header="Active">
-      <div class="tab-content">
-        <div class="empty-state">
-          No tasks found in 'Active'.
-        </div>
-      </div>
-    </p-tabPanel>
-
-    <p-tabPanel header="Completed">
-      <div class="tab-content">
-        <div class="empty-state">
-          No tasks found in 'Completed'.
-        </div>
+        <table *ngIf="tasks.length > 0" class="task-table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Due Date</th>
+              <th>Status</th>
+              <th>Priority</th>
+              <th>Project</th>
+              <th>Assigned To</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let task of tasks">
+              <td>{{ task.title }}</td>
+              <td>{{ task.description }}</td>
+              <td>{{ task.due_date * 1000 | date: 'mediumDate' }}</td>
+              <td>{{ task.status }}</td>
+              <td>{{ task.priority }}</td>
+              <td>{{ task.project }}</td>
+              <td>{{ task.assigned_to }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </p-tabPanel>
   </p-tabView>
@@ -71,4 +80,5 @@
   >
     <app-modal-task></app-modal-task>
   </p-dialog>
+
 </div>
