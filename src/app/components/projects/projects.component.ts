@@ -21,13 +21,19 @@ import { CommonModule } from '@angular/common';
 export class ProjectsComponent implements OnInit {
   displayAddProjectDialog: boolean = false;
   projects: any[] = [];
+
+  searchTerm: string = '';
+filteredProjects: any[] = [];
+
   constructor(    private backendService: BackendService,
       private projectService: ProjectService
     ) { }
-    ngOnInit() {
-      this.getProjects();
+    ngOnInit(): void {
+      this.projectService.getProjects().subscribe(data => {
+        this.projects = data;
+        this.filteredProjects = data;
+      });
     }
-    
     getProjects() { 
       this.projectService.getProjects().subscribe(
         (response: any) => {
@@ -37,6 +43,14 @@ export class ProjectsComponent implements OnInit {
         }
       );
     }
-
+    filterProjects() {
+      const term = this.searchTerm.toLowerCase();
+      this.filteredProjects = this.projects.filter(project =>
+        project.name.toLowerCase().includes(term) ||
+        project.description.toLowerCase().includes(term) ||
+        project.created_by.toLowerCase().includes(term)
+      );
+    }
+    
   
 }

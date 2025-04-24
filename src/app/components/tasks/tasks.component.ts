@@ -12,12 +12,13 @@ import { ModalTaskComponent } from '../modals/modal-task/modal-task.component';
 
 import {TaskService  } from '../../services/task.service';
 import { CommonModule } from '@angular/common';
+import { TableModule } from 'primeng/table';
 
 
 @Component({
   selector: 'app-tasks',
   standalone: true,
-  imports: [InputTextModule,ButtonModule,TabViewModule, DropdownModule,DialogModule,ModalTaskComponent,CommonModule,TabPanel],
+  imports: [InputTextModule,ButtonModule,TabViewModule, DropdownModule,DialogModule,ModalTaskComponent,CommonModule,TabPanel,TableModule],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css'
 })

@@ -1,46 +1,61 @@
 <div class="projects-container">
-  <h2>Projects</h2>
-
-  <button
-    pButton
-    type="button"
-    label="Add project"
-    icon="pi pi-plus"
-    class="btn-black"
-    (click)="displayAddProjectDialog = true"
-  ></button>
-
+  <div class="header-bar">
+    <h2>Projects</h2>
+    <button
+      pButton
+      type="button"
+      label="Add Project"
+      icon="pi pi-plus"
+      class="btn-black"
+      (click)="displayAddProjectDialog = true"
+    ></button>
+  </div>
+  <div class="search-bar">
+    <span class="p-input-icon-left">
+      <i class="pi pi-search"></i>
+      <input
+        type="text"
+        pInputText
+        placeholder="Search..."
+        [(ngModel)]="searchTerm"
+        (input)="filterProjects()"
+      />
+    </span>
+  </div>
+  
   <div *ngIf="projects.length === 0" class="empty-state">
-    No Project founded.
+    No project found.
   </div>
 
-  <div *ngFor="let project of projects" class="project-card">
-    <div class="project-header">
-      <h3>{{ project.name }}</h3>
-      <div class="project-actions">
-        <button
-          pButton
-          type="button"
-          icon="pi pi-pencil"
-          class="p-button-rounded p-button-text p-button-info"
-          tooltip="Modifier"
-        ></button>
-        <button
-          pButton
-          type="button"
-          icon="pi pi-trash"
-          class="p-button-rounded p-button-text p-button-danger"
-          tooltip="Supprimer"
-        ></button>
+  <div class="projects-grid">
+    <div *ngFor="let project of filteredProjects" class="project-card">
+      <div class="project-header">
+        <h3>{{ project.name }}</h3>
+        <div class="project-actions">
+          <button
+            pButton
+            type="button"
+            icon="pi pi-pencil"
+            class="p-button-rounded p-button-text p-button-info"
+            tooltip="Edit"
+          ></button>
+          <button
+            pButton
+            type="button"
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-text p-button-danger"
+            tooltip="Delete"
+          ></button>
+        </div>
       </div>
-    </div>
 
-    <p><strong>Description:</strong> {{ project.description }}</p>
-    <p><strong>created by:</strong> {{ project.create_dby }}</p>
+      <p><strong>Description:</strong> {{ project.description }}</p>
+      <p><strong>Created by:</strong> {{ project.created_by }}</p>
+    </div>
   </div>
 
   <p-dialog
-    header="Add project"
+    header="Add Project"
     [(visible)]="displayAddProjectDialog"
     [modal]="true"
     [closable]="true"
