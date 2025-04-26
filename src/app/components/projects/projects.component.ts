@@ -52,5 +52,13 @@ filteredProjects: any[] = [];
       );
     }
     
+    addProject() {
+      this.displayAddProjectDialog = true;
+    }
+    
+    onProjectCreated() {
+      this.displayAddProjectDialog = false;
+      this.getProjects(); // Refresh the project list
+    }
   
 }

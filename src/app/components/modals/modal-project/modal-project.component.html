@@ -1,20 +1,21 @@
 <div class="p-fluid">
   <div class="p-field">
     <label for="name">Project Name</label>
-    <input id="name" type="text" pInputText />
+    <input id="name" type="text" pInputText [(ngModel)]="projectData.name" />
   </div>
 
   <div class="p-field">
     <label for="description">Description</label>
-    <textarea id="description" pInputTextarea></textarea>
+    <textarea id="description" pInputTextarea [(ngModel)]="projectData.description"></textarea>
   </div>
 
   <div class="p-field">
     <label for="createdBy">Created By</label>
     <p-dropdown
       [options]="users"
-      optionLabel="first_name"
-      [(ngModel)]="selectedUser"
+      optionLabel="name"
+      optionValue="name"
+      [(ngModel)]="projectData.created_by"
       placeholder="Select a user"
       [filter]="true"
       inputId="createdBy"
@@ -22,5 +23,5 @@
     </p-dropdown>
   </div>
 
-  <button pButton type="button" label="Save" icon="pi pi-check" class="p-mt-3"></button>
+  <button pButton type="button" label="Save" icon="pi pi-check" class="p-mt-3" (click)="saveProject()"></button>
 </div>

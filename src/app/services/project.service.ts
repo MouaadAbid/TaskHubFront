@@ -23,7 +23,7 @@ export class ProjectService {
 
   // Create a new project
   createProject(projectData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/projects/`, projectData, {
+    return this.http.post(`${this.apiUrl}`, projectData, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     });
   }
