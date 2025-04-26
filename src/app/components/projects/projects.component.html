@@ -8,6 +8,7 @@
       icon="pi pi-plus"
       class="btn-black"
       (click)="displayAddProjectDialog = true"
+      (click)="addProject()"
     ></button>
   </div>
   <div class="search-bar">
@@ -61,6 +62,7 @@
     [closable]="true"
     [style]="{ width: '40vw' }"
   >
-    <app-modal-project></app-modal-project>
+    <app-modal-project (projectCreated)="onProjectCreated()"></app-modal-project>
   </p-dialog>
+  <!-- <button pButton type="button" label="Add Project" icon="pi pi-plus" (click)="addProject()"></button> -->
 </div>
