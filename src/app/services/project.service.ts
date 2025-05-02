@@ -14,31 +14,30 @@ export class ProjectService {
 
   //  GET  All projects
   getProjects(): Observable<any> {
-    return this.http.get(this.apiUrl);
-  }
-   // Get a project by ID
-   getProjectById(id: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/projects/${id}/`);
-  }
+  return this.http.get(this.apiUrl); // Ensure this matches the backend API
+}
 
-  // Create a new project
-  createProject(projectData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}`, projectData, {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    });
-  }
+getProjectById(id: number): Observable<any> {
+  return this.http.get(`${this.apiUrl}/${id}`); // Fixed endpoint
+}
 
-  // Edit an existing project
-  editProject(id: number, projectData: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/projects/${id}/`, projectData, {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    });
-  }
+createProject(projectData: any): Observable<any> {
+  return this.http.post(`${this.apiUrl}`, projectData, {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  });
+}
 
-  // Delete a project
-  deleteProject(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/projects/${id}/`);
-  }
+editProject(id: number, projectData: any): Observable<any> {
+  return this.http.put(`${this.apiUrl}/${id}`, projectData, {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  });
+}
+
+deleteProject(id: number): Observable<any> {
+  return this.http.delete(`${this.apiUrl}/${id}`, {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  });
+}
 
  
 }

@@ -58,7 +58,7 @@
             <tr *ngFor="let task of tasks">
               <td>{{ task.title }}</td>
               <td>{{ task.description }}</td>
-              <td>{{ task.due_date * 1000 | date: 'mediumDate' }}</td>
+              <td>{{ task.due_date | date: 'mediumDate' }}</td>
               <td>{{ task.status }}</td>
               <td>{{ task.priority }}</td>
               <td>{{ task.project }}</td>
@@ -78,7 +78,7 @@
     [closable]="true"
     [style]="{ width: '40vw' }"
   >
-    <app-modal-task></app-modal-task>
+    <app-modal-task (taskCreated)="onTaskCreated($event)"></app-modal-task>
   </p-dialog>
 
 </div>

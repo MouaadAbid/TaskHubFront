@@ -7,10 +7,10 @@
       label="Add Project"
       icon="pi pi-plus"
       class="btn-black"
-      (click)="displayAddProjectDialog = true"
       (click)="addProject()"
     ></button>
   </div>
+
   <div class="search-bar">
     <span class="p-input-icon-left">
       <i class="pi pi-search"></i>
@@ -23,12 +23,12 @@
       />
     </span>
   </div>
-  
-  <div *ngIf="projects.length === 0" class="empty-state">
+
+  <div *ngIf="filteredProjects.length === 0" class="empty-state">
     No project found.
   </div>
 
-  <div class="projects-grid">
+  <div *ngIf="filteredProjects.length > 0" class="projects-grid">
     <div *ngFor="let project of filteredProjects" class="project-card">
       <div class="project-header">
         <h3>{{ project.name }}</h3>
@@ -39,6 +39,7 @@
             icon="pi pi-pencil"
             class="p-button-rounded p-button-text p-button-info"
             tooltip="Edit"
+            (click)="editProject(project)"
           ></button>
           <button
             pButton
@@ -46,10 +47,10 @@
             icon="pi pi-trash"
             class="p-button-rounded p-button-text p-button-danger"
             tooltip="Delete"
+            (click)="confirmDeleteProject(project.id)"
           ></button>
         </div>
       </div>
-
       <p><strong>Description:</strong> {{ project.description }}</p>
       <p><strong>Created by:</strong> {{ project.created_by }}</p>
     </div>
@@ -64,5 +65,19 @@
   >
     <app-modal-project (projectCreated)="onProjectCreated()"></app-modal-project>
   </p-dialog>
-  <!-- <button pButton type="button" label="Add Project" icon="pi pi-plus" (click)="addProject()"></button> -->
+
+  <p-confirmDialog></p-confirmDialog>
+
+  <p-dialog
+    header="Edit Project"
+    [(visible)]="displayEditProjectDialog"
+    [modal]="true"
+    [closable]="true"
+    [style]="{ width: '40vw' }"
+  >
+    <app-modal-project-edit
+      [project]="selectedProject"
+      (projectUpdated)="onProjectUpdated()"
+    ></app-modal-project-edit>
+  </p-dialog>
 </div>

@@ -1,64 +1,107 @@
 import { Component, OnInit } from '@angular/core';
+import { ProjectService } from '../../services/project.service';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ModalProjectComponent } from '../modals/modal-project/modal-project.component';
+import { ModalProjectEditComponent } from '../modals/modal-project-edit/modal-project-edit.component';
+
 import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
 import { DialogModule } from 'primeng/dialog';
-
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
-import { ModalProjectComponent } from '../modals/modal-project/modal-project.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ButtonModule } from 'primeng/button';
-import { ProjectService } from '../../services/project.service';
-import { BackendService } from '../../services/backend.service';
 import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [TableModule,
-    PaginatorModule, InputTextModule,FormsModule,DialogModule,ModalProjectComponent,ButtonModule,CommonModule],
   templateUrl: './projects.component.html',
-  styleUrl: './projects.component.css'
+  styleUrls: ['./projects.component.css'],
+  imports: [
+    TableModule,
+    PaginatorModule,
+    InputTextModule,
+    FormsModule,
+    DialogModule,
+    ConfirmDialogModule,
+    ModalProjectComponent,
+    ModalProjectEditComponent,
+    ButtonModule,
+    CommonModule
+  ],
+  providers: [ConfirmationService, MessageService]
 })
 export class ProjectsComponent implements OnInit {
-  displayAddProjectDialog: boolean = false;
+  displayAddProjectDialog = false;
+  displayEditProjectDialog = false;
   projects: any[] = [];
-
+  filteredProjects: any[] = [];
   searchTerm: string = '';
-filteredProjects: any[] = [];
+  selectedProject: any = null;
 
-  constructor(    private backendService: BackendService,
-      private projectService: ProjectService
-    ) { }
-    ngOnInit(): void {
-      this.projectService.getProjects().subscribe(data => {
+  constructor(
+    private projectService: ProjectService,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
+  ) {}
+
+  ngOnInit(): void {
+    this.getProjects();
+  }
+
+  editProject(project: any): void {
+    this.selectedProject = { ...project };
+    this.displayEditProjectDialog = true;
+  }
+
+  onProjectUpdated(): void {
+    this.displayEditProjectDialog = false;
+    this.getProjects();
+  }
+
+  getProjects(): void {
+    this.projectService.getProjects().subscribe(
+      (data: any[]) => {
         this.projects = data;
         this.filteredProjects = data;
-      });
-    }
-    getProjects() { 
-      this.projectService.getProjects().subscribe(
-        (response: any) => {
-          this.projects = response;
-          console.log('Projects fetched successfully:', this.projects);
-          
-        }
-      );
-    }
-    filterProjects() {
-      const term = this.searchTerm.toLowerCase();
-      this.filteredProjects = this.projects.filter(project =>
-        project.name.toLowerCase().includes(term) ||
-        project.description.toLowerCase().includes(term) ||
-        project.created_by.toLowerCase().includes(term)
-      );
-    }
-    
-    addProject() {
-      this.displayAddProjectDialog = true;
-    }
-    
-    onProjectCreated() {
-      this.displayAddProjectDialog = false;
-      this.getProjects(); // Refresh the project list
-    }
-  
+      },
+      (error) => {
+        console.error('Error fetching projects:', error);
+      }
+    );
+  }
+
+  filterProjects(): void {
+    const term = this.searchTerm.toLowerCase();
+    this.filteredProjects = this.projects.filter(project =>
+      project.name.toLowerCase().includes(term) ||
+      project.description.toLowerCase().includes(term) ||
+      project.created_by.toLowerCase().includes(term)
+    );
+  }
+
+  addProject(): void {
+    this.displayAddProjectDialog = true;
+  }
+
+  onProjectCreated(): void {
+    this.displayAddProjectDialog = false;
+    this.getProjects();
+  }
+
+  confirmDeleteProject(id: number): void {
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete this project?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.projectService.deleteProject(id).subscribe(() => {
+          this.projects = this.projects.filter(p => p.id !== id);
+          this.filteredProjects = this.filteredProjects.filter(p => p.id !== id);
+          this.messageService.add({ severity: 'success', summary: 'Deleted', detail: 'Project deleted successfully' });
+        });
+      }
+    });
+  }
 }

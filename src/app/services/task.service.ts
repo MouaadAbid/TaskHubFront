@@ -22,7 +22,14 @@ export class TaskService {
 
   // Create a new task
   createTask(taskData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/`, taskData, {
+    const payload = {
+      title: taskData.title,
+      description: taskData.description,
+      priority: taskData.priority,
+      due_date: taskData.dueDate ? new Date(taskData.dueDate).toISOString() : null
+    }; // Ensure the payload matches the backend's expected structure
+
+    return this.http.post(`${this.apiUrl}`, payload, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     });
   }
