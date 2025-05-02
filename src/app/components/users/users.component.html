@@ -78,6 +78,6 @@
     [closable]="true"
     [style]="{ width: '40vw' }"
   >
-    <app-modal-user></app-modal-user>
+    <app-modal-user (userCreated)="onUserCreated($event)"></app-modal-user>
   </p-dialog>
 </div>

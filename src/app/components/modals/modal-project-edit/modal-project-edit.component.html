@@ -1,0 +1,13 @@
+<div class="p-fluid">
+  <div class="field">
+    <label for="name">Project Name</label>
+    <input id="name" pInputText [(ngModel)]="project.name" />
+  </div>
+
+  <div class="field">
+    <label for="description">Description</label>
+    <textarea id="description" [(ngModel)]="project.description"></textarea>
+  </div>
+
+  <button pButton label="Save" class="mt-3" (click)="saveProject()"></button>
+</div>

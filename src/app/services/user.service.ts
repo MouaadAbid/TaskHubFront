@@ -22,7 +22,7 @@ export class UserService {
 
   // Create a new user
   createUser(userData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/`, userData, {
+    return this.http.post(`${this.apiUrl}/add`, userData, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     });
   }
@@ -37,5 +37,10 @@ export class UserService {
   // Delete a user
   deleteUser(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}/`);
+  }
+
+  // Refresh the user list
+  refreshUsers(): Observable<any> {
+    return this.getUsers(); // Reuse the existing getUsers method
   }
 }

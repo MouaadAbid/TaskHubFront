@@ -1,28 +1,35 @@
 <div class="p-fluid">
-    <div class="field">
-      <label for="title">Task title</label>
-      <input id="title" pInputText />
-    </div>
-  
-    <div class="field">
-      <label for="description">Description (optional)</label>
-      <textarea id="description" pInputTextarea></textarea>
-    </div>
-  
-    <div class="formgrid grid">
-      <div class="field col">
-        <label for="priority">Priority</label>
-        <p-dropdown [options]="['Low', 'Medium', 'High']" placeholder="Select priority"></p-dropdown>
-      </div>
-  
-      <div class="field col">
-        <label for="dueDate">Due Date (optional)</label>
-        <p-calendar inputId="dueDate" showIcon></p-calendar>
-      </div>
-    </div>
-  
-    <button pButton label="Create Task" class="mt-3"></button>
+  <div class="field">
+    <label for="title">Task title</label>
+    <input id="title" pInputText [(ngModel)]="task.title" />
   </div>
-  
 
-  
+  <div class="field">
+    <label for="description">Description (optional)</label>
+    <textarea id="description" pInputTextarea [(ngModel)]="task.description"></textarea>
+  </div>
+
+  <div class="formgrid grid">
+    <div class="field col">
+      <label for="priority">Priority</label>
+      <p-dropdown
+        [options]="priorities"
+        [(ngModel)]="task.priority"
+        placeholder="Select priority"
+      ></p-dropdown>
+    </div>
+
+    <div class="field col">
+      <label for="dueDate">Due Date (optional)</label>
+      <p-calendar
+        inputId="dueDate"
+        [(ngModel)]="task.dueDate"
+        showIcon
+      ></p-calendar>
+    </div>
+  </div>
+
+  <button pButton label="Create Task" class="mt-3" (click)="saveTask()"></button>
+</div>
+
+

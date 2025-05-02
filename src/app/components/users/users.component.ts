@@ -18,23 +18,42 @@ import { MultiSelectModule } from 'primeng/multiselect';
   styleUrl: './users.component.css'
 })
 export class UsersComponent implements OnInit {
-
   displayAddUserDialog = false;
   users: any[] = [];
 
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.userService.getUsers().subscribe((response: any) => {
+    this.refreshUsers();
+  }
 
-      console.log('user:',response);
-      
+  onUserCreated(newUser: any) {
+    this.displayAddUserDialog = false;
+    this.userService.createUser(newUser).subscribe(
+      (createdUser: any) => {
+        console.log('User created successfully:', createdUser);
+        this.users.push({
+          name: `${createdUser.firstName} ${createdUser.lastName}`,
+          email: createdUser.email,
+          phone: createdUser.phone || 'N/A',
+          photo: createdUser.image,
+          address: createdUser.address?.city || 'N/A',
+        }); // Add the new user to the local list
+      },
+      (error) => {
+        console.error('Error creating user:', error);
+      }
+    );
+  }
+
+  private refreshUsers() {
+    this.userService.getUsers().subscribe((response: any) => {
       this.users = response.users.map((user: any) => ({
-        name: `${user.firstName} ${user.firstName}`,
+        name: `${user.firstName} ${user.lastName}`,
         email: user.email,
-        phone: user.phone, // Reqres ne fournit pas le téléphone, tu peux mettre une valeur par défaut
+        phone: user.phone || 'N/A', // Default value if phone is missing
         photo: user.image,
-        address: user.address.city,
+        address: user.address?.city || 'N/A', // Default value if address is missing
       }));
     });
   }

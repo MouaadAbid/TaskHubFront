@@ -32,9 +32,19 @@ export class TasksComponent implements OnInit {
   getTasks() {
     this.taskService.getTasks().subscribe(
       (response: any) => {
-        this.tasks = response;
+        this.tasks = response.map((task: any) => ({
+          title: task.title,
+          description: task.description,
+          due_date: task.due_date,
+          status: task.status || 'Pending',
+          priority: task.priority,
+          project: task.project || 'Unassigned',
+          assigned_to: task.assigned_to || 'Unassigned'
+        })); // Map response to match the table structure
         console.log('Tasks fetched successfully:', this.tasks);
-        
+      },
+      (error) => {
+        console.error('Error fetching tasks:', error);
       }
     );
   }
@@ -42,5 +52,18 @@ export class TasksComponent implements OnInit {
   tasks: any[] = [];
   openTaskModal() {
     this.displayNewTaskDialog = true;
+  }
+
+  onTaskCreated(newTask: any) {
+    this.displayNewTaskDialog = false;
+    this.taskService.createTask(newTask).subscribe(
+      (createdTask: any) => {
+        console.log('Task created successfully:', createdTask);
+        this.tasks.push(createdTask); // Add the new task to the local list
+      },
+      (error) => {
+        console.error('Error creating task:', error);
+      }
+    );
   }
 }
