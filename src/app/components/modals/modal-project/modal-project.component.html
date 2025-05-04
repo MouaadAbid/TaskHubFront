@@ -1,27 +1,52 @@
-<div class="p-fluid">
-  <div class="p-field">
-    <label for="name">Project Name</label>
-    <input id="name" type="text" pInputText [(ngModel)]="projectData!.name" />
+<div class="p-fluid p-formgrid p-grid" style="gap: 1rem;">
+  <!-- Titre -->
+  <h3>{{ projectToEdit ? 'Edit Project' : 'Add New Project' }}</h3>
+
+  <!-- Nom du projet -->
+  <div class="p-col-12">
+    <label for="name">Name</label>
+    <input
+      id="name"
+      type="text"
+      pInputText
+      [(ngModel)]="projectData.name"
+      placeholder="Enter project name"
+    />
   </div>
 
-  <div class="p-field">
+  <!-- Description -->
+  <div class="p-col-12">
     <label for="description">Description</label>
-    <textarea id="description" pInputTextarea [(ngModel)]="projectData.description"></textarea>
+    <input
+      id="description"
+      type="text"
+      pInputText
+      [(ngModel)]="projectData.description"
+      placeholder="Enter description"
+    />
   </div>
 
-  <div class="p-field">
-    <label for="createdBy">Created By</label>
+  <!-- Créé par -->
+  <div class="field">
+    <label for="created_by">Created By</label>
     <p-dropdown
       [options]="users"
-      optionLabel="name"
-      optionValue="name"
       [(ngModel)]="projectData.created_by"
+      optionLabel="name"
       placeholder="Select a user"
-      [filter]="true"
-      inputId="createdBy"
-    >
-    </p-dropdown>
+    ></p-dropdown>
   </div>
+  
 
-  <button pButton type="button" label="Save" icon="pi pi-check" class="p-mt-3" (click)="saveProject()"></button>
+  <!-- Boutons -->
+  <div class="p-col-12 p-d-flex p-jc-end" style="gap: 1rem; margin-top: 1rem;">
+    <button
+      pButton
+      type="button"
+      label="{{ projectToEdit ? 'Update' : 'Create' }}"
+      icon="pi pi-check"
+      class="p-button-success"
+      (click)="saveProject()"
+    ></button>
+  </div>
 </div>

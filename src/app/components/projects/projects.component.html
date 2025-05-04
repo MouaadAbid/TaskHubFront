@@ -56,28 +56,19 @@
     </div>
   </div>
 
+  <!-- ✅ Dialog partagé pour ajout/édition -->
   <p-dialog
-    header="Add Project"
-    [(visible)]="displayAddProjectDialog"
+    header="{{ selectedProject ? 'Edit Project' : 'Add Project' }}"
+    [(visible)]="displayProjectDialog"
     [modal]="true"
     [closable]="true"
     [style]="{ width: '40vw' }"
   >
-    <app-modal-project (projectCreated)="onProjectCreated()"></app-modal-project>
+    <app-modal-project
+      [projectToEdit]="selectedProject"
+      (projectSaved)="onProjectSaved()"
+    ></app-modal-project>
   </p-dialog>
 
   <p-confirmDialog></p-confirmDialog>
-
-  <p-dialog
-    header="Edit Project"
-    [(visible)]="displayEditProjectDialog"
-    [modal]="true"
-    [closable]="true"
-    [style]="{ width: '40vw' }"
-  >
-    <app-modal-project-edit
-      [project]="selectedProject"
-      (projectUpdated)="onProjectUpdated()"
-    ></app-modal-project-edit>
-  </p-dialog>
 </div>
