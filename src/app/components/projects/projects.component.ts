@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../../services/project.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ModalProjectComponent } from '../modals/modal-project/modal-project.component';
-import { ModalProjectEditComponent } from '../modals/modal-project-edit/modal-project-edit.component';
 
 import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
@@ -26,15 +25,13 @@ import { CommonModule } from '@angular/common';
     DialogModule,
     ConfirmDialogModule,
     ModalProjectComponent,
-    ModalProjectEditComponent,
     ButtonModule,
     CommonModule
   ],
   providers: [ConfirmationService, MessageService]
 })
 export class ProjectsComponent implements OnInit {
-  displayAddProjectDialog = false;
-  displayEditProjectDialog = false;
+  displayProjectDialog = false;
   projects: any[] = [];
   filteredProjects: any[] = [];
   searchTerm: string = '';
@@ -50,26 +47,31 @@ export class ProjectsComponent implements OnInit {
     this.getProjects();
   }
 
-  editProject(project: any): void {
-    this.selectedProject = { ...project };
-    this.displayEditProjectDialog = true;
+  addProject(): void {
+    this.selectedProject = null;
+    this.displayProjectDialog = true;
   }
 
-  onProjectUpdated(): void {
-    this.displayEditProjectDialog = false;
+  editProject(project: any): void {
+    this.selectedProject = { ...project };
+    this.displayProjectDialog = true;
+  }
+
+  onProjectSaved(): void {
+    this.displayProjectDialog = false;
     this.getProjects();
   }
 
   getProjects(): void {
-    this.projectService.getProjects().subscribe(
-      (data: any[]) => {
+    this.projectService.getProjects().subscribe({
+      next: (data: any[]) => {
         this.projects = data;
         this.filteredProjects = data;
       },
-      (error) => {
-        console.error('Error fetching projects:', error);
+      error: (error) => {
+        console.error('Erreur récupération projets:', error);
       }
-    );
+    });
   }
 
   filterProjects(): void {
@@ -81,15 +83,6 @@ export class ProjectsComponent implements OnInit {
     );
   }
 
-  addProject(): void {
-    this.displayAddProjectDialog = true;
-  }
-
-  onProjectCreated(): void {
-    this.displayAddProjectDialog = false;
-    this.getProjects();
-  }
-
   confirmDeleteProject(id: number): void {
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete this project?',
@@ -99,7 +92,11 @@ export class ProjectsComponent implements OnInit {
         this.projectService.deleteProject(id).subscribe(() => {
           this.projects = this.projects.filter(p => p.id !== id);
           this.filteredProjects = this.filteredProjects.filter(p => p.id !== id);
-          this.messageService.add({ severity: 'success', summary: 'Deleted', detail: 'Project deleted successfully' });
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Deleted',
+            detail: 'Project deleted successfully'
+          });
         });
       }
     });
